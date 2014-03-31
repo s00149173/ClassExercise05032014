@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ClassExercise05032014.Models.Track>
+
+@{
+    ViewBag.Title = "_Tracks";
+}
+
+<h2>_Tracks</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TrackName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrackName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlbumId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TrackId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TrackId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TrackId })
+        </td>
+    </tr>
+}
+
+</table>

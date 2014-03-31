@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ClassExercise05032014.Models.Album>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*@Html.Action("test")*@
+
+<div class="col-md-6">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-bordered table-striped table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td onclick="showTrackList('@item.AlbumId')">
+                    @Html.DisplayFor(modelItem => item.AlbumName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AlbumId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.AlbumId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AlbumId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div id="trackList" class="col-md-6"></div>
+
+
+@section scripts
+{
+    <script>
+        function showTrackList(AlbumId) {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("_Tracks", "Home")',
+                data: { id: AlbumId },
+                success: function (data) {
+                    $('#trackList').html(data);
+
+
+                }
+            });
+        }
+    </script>
+}
